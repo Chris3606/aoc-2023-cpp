@@ -1,0 +1,4 @@
+**/build/
+**/.vs
+inputs/*.txt
+!inputs/*_sample.txt
