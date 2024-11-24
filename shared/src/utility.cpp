@@ -7,15 +7,13 @@ namespace fs = std::filesystem;
 
 namespace aoc
 {
-    std::string read_file(const std::string &file_path)
+    std::string read_file(std::ifstream &file)
     {
-        std::cout << "Path: " << file_path << std::endl;
-        std::ifstream t(file_path);
-        if (!t.is_open())
+        if (!file.is_open())
             throw std::exception("Failed to open file!");
 
         std::stringstream buffer;
-        buffer << t.rdbuf();
+        buffer << file.rdbuf();
 
         return buffer.str();
     }

@@ -2,9 +2,9 @@
 
 namespace aoc
 {
-    TInput parse_input([[maybe_unused]] const std::string &input)
+    TInput parse_input([[maybe_unused]] std::istream &input)
     {
-        throw std::exception("Not yet implemented.");
+        throw std::exception("Input parsing not yet implemented.");
     }
 
     std::string part1([[maybe_unused]] const TInput &input)

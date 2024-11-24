@@ -6,10 +6,10 @@ namespace aoc
     /**
      * @brief Reads the contents of a file into a string.
      * 
-     * @param file_path Path to the file.
-     * @return std::string - A string representing the file path.
+     * @param file - An input stream reading from the file.
+     * @return std::string - A string representing the contents of the file.
      */
-    std::string read_file(const std::string &file_path);
+    std::string read_file(std::ifstream &file);
 
     /**
      * @brief Gets a valid file path to the given file name in the inputs/ directory.

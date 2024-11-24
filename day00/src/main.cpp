@@ -1,6 +1,7 @@
 #include "solution.hpp"
 #include "utility.hpp"
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 namespace fs = std::filesystem;
 
@@ -8,7 +9,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char *argv[])
 {
     try
     {
-        auto input = aoc::parse_input(aoc::input_path("day00_sample.txt"));
+        std::ifstream input_stream(aoc::input_path("day00_sample.txt"));
+        auto input = aoc::parse_input(input_stream);
+        input_stream.close();
 
         auto p1_solution = aoc::part1(input);
         std::cout << "Part 1: " << p1_solution << std::endl;
