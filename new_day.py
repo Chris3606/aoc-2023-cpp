@@ -34,13 +34,16 @@ def main() -> None:
     shutil.copytree(os.path.join(script_dir, "day00"), day_path)
 
     # Change day references
-    findReplace(day_path, "day00", day, os.path.join(day_path, "*"))
+    findReplace(day_path, "day00", day, "*")
 
     # Add CMake subdirectory command to ensure new day is compiled
-    subdir_command = f'add_subdirectory("{day}")'
+    subdir_command = f"add_subdirectory({day})"
     with open(os.path.join(script_dir, "CMakeLists.txt"), "r", encoding="utf-8") as cmake:
         contains_subdir = subdir_command in cmake.read()
     
     if not contains_subdir:
         with open(os.path.join(script_dir, "CMakeLists.txt"), "a", encoding="utf-8") as cmake:
-            cmake.write(subdir_command)
+            cmake.write("\n" + subdir_command)
+
+if __name__ == "__main__":
+    main()
