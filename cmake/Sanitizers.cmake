@@ -8,30 +8,39 @@ function(Sanitizers_Enable TARGET ADDRESS UNDEF LEAK THREAD COMPILER_DIR)
                                                 "GNU")
         target_compile_options(${TARGET} PRIVATE "-fno-omit-frame-pointer")
         target_link_options(${TARGET} PRIVATE "-fno-omit-frame-pointer")
-
+        
         if (ADDRESS)
-            target_compile_options(${TARGET} PRIVATE "-fsanitize=address")
-            target_link_options(${TARGET} PRIVATE "-fsanitize=address")
+            target_compile_options(${TARGET} PRIVATE -fsanitize=address -shared-libsan)
+            target_link_options(${TARGET} PRIVATE -fsanitize=address -shared-libsan)
         endif()
 
         if (UNDEF)
-            target_compile_options(${TARGET} PRIVATE "-fsanitize=undefined")
-            target_link_options(${TARGET} PRIVATE "-fsanitize=undefined")
+            target_compile_options(${TARGET} PRIVATE -fsanitize=undefined)
+            target_link_options(${TARGET} PRIVATE -fsanitize=undefined)
         endif()
 
         if (LEAK)
-            target_compile_options(${TARGET} PRIVATE "-fsanitize=leak")
-            target_link_options(${TARGET} PRIVATE "-fsanitize=leak")
+            if (CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
+                message(AUTHOR_WARNING "Leak sanitizer selected, but this is not supported for clang MSVC targets.")
+            else()
+                target_compile_options(${TARGET} PRIVATE -fsanitize=leak)
+                target_link_options(${TARGET} PRIVATE -fsanitize=leak)
+            endif()
         endif()
 
         if (THREAD)
-            target_compile_options(${TARGET} PRIVATE "-fsanitize=thread")
-            target_link_options(${TARGET} PRIVATE "-fsanitize=thread")
+            if (CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
+                message(AUTHOR_WARNING "Thread sanitizer selected, but this is not supported for clang MSVC targets.")
+            else()
+                target_compile_options(${TARGET} PRIVATE -fsanitize=thread)
+                target_link_options(${TARGET} PRIVATE -fsanitize=thread)
+            endif()
         endif()
+        
     
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         if (ADDRESS)
-            target_compile_options(${TARGET} PRIVATE "/fsanitize=address")
+            target_compile_options(${TARGET} PRIVATE /fsanitize=address)
 
             # Modern MSVC (aka recent releases of VS2022) depend on a single DLL for asan, even for statically
             # linked targets.  So, for executable targets, we'll copy that DLL (and its dependencies) to the output

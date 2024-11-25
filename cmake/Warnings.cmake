@@ -38,7 +38,7 @@ function(Warnings_Enable TARGET)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         set(WARNINGS ${GCC_WARNINGS})
     else()
-        message(FATAL_ERROR "Unsupported compiler.")
+        message(FATAL_ERROR "Unsupported compiler ${CMAKE_CXX_COMPILER_ID}.")
     endif()
 
     target_compile_options(${TARGET} PRIVATE ${WARNINGS})

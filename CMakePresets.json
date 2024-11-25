@@ -63,8 +63,18 @@
             }
         },
         {
-            "name": "Ninja-Debug",
-            "displayName": "Ninja | AnyArch | Debug",
+            "name": "common-clang",
+            "hidden": true,
+            "description": "Settings that apply to all builds which use clang.",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang.exe",
+                "CMAKE_CXX_COMPILER": "clang.exe",
+                "CMAKE_LINKER": "lld-link.exe"
+            }
+        },
+        {
+            "name": "Ninja-MSVC-Debug",
+            "displayName": "Ninja | MSVC | AnyArch | Debug",
             "description": "Debug-mode binaries using the Ninja single-config generator, with safety-features enabled.",
             "inherits": [
                 "common-ninja",
@@ -73,8 +83,19 @@
             ]
         },
         {
-            "name": "NinjaVS-x64-Debug",
-            "displayName": "NinjaVS | x64 | Debug",
+            "name": "Ninja-Clang-Debug",
+            "displayName": "Ninja | Clang | AnyArch | Debug",
+            "description": "Debug-mode binaries using the Ninja single-config generator, with safety-features enabled, compiled with clang.",
+            "inherits": [
+                "common-ninja",
+                "common-single-debug",
+                "common-safety",
+                "common-clang"
+            ]
+        },
+        {
+            "name": "NinjaVS-MSVC-x64-Debug",
+            "displayName": "NinjaVS | MSVC | x64 | Debug",
             "description": "Debug-mode 64-bit binaries using the Ninja single-config generator, with ASan enabled on executable targets.  Only use in Visual Studio.",
             "inherits": [
                 "common-ninja",
@@ -84,8 +105,20 @@
             ]
         },
         {
-            "name": "Ninja-Release",
-            "displayName": "Ninja | AnyArch | Release",
+            "name": "NinjaVS-Clang-x64-Debug",
+            "displayName": "NinjaVS | Clang | x64 | Debug",
+            "description": "Debug-mode 64-bit binaries using the Ninja single-config generator, with ASan enabled on executable targets, compiled using clang.  Only use in Visual Studio.",
+            "inherits": [
+                "common-ninja",
+                "common-single-debug",
+                "common-x64-external",
+                "common-safety",
+                "common-clang"
+            ]
+        },
+        {
+            "name": "Ninja-MSVC-Release",
+            "displayName": "Ninja | MSVC | AnyArch | Release",
             "description": "Release-mode binaries using the Ninja single-config generator, with no safety features enabled.",
             "inherits": [
                 "common-ninja",
@@ -94,14 +127,37 @@
             ]
         },
         {
-            "name": "NinjaVS-x64-Release",
-            "displayName": "NinjaVS | x64 | Release",
+            "name": "Ninja-Clang-Release",
+            "displayName": "Ninja | Clang | AnyArch | Release",
+            "description": "Release-mode binaries using the Ninja single-config generator, with no safety features enabled, compiled using clang.",
+            "inherits": [
+                "common-ninja",
+                "common-single-release",
+                "common-no-safety",
+                "common-clang"
+            ]
+        },
+        {
+            "name": "NinjaVS-MSVC-x64-Release",
+            "displayName": "NinjaVS | MSVC | x64 | Release",
             "description": "Release-mode 64-bit binaries using the Ninja single-config generator, with no safety features enabled.  Only use in Visual Studio.",
             "inherits": [
                 "common-ninja",
                 "common-single-release",
                 "common-no-safety",
                 "common-x64-external"
+            ]
+        },
+        {
+            "name": "NinjaVS-Clang-x64-Release",
+            "displayName": "NinjaVS | Clang | x64 | Release",
+            "description": "Release-mode 64-bit binaries using the Ninja single-config generator, with no safety features enabled, compiled using clang.  Only use in Visual Studio.",
+            "inherits": [
+                "common-ninja",
+                "common-single-release",
+                "common-no-safety",
+                "common-x64-external",
+                "common-clang"
             ]
         }
     ]
