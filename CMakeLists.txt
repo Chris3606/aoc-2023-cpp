@@ -30,3 +30,4 @@ get_filename_component(COMPILER_DIR ${CMAKE_C_COMPILER} DIRECTORY)
 # Add subdirectories for each day and shared code
 add_subdirectory(shared)
 add_subdirectory(day00)
+add_subdirectory(day01)
