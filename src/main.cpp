@@ -30,7 +30,7 @@ int main(int argc, const char *argv[])
 
     bool sample = argc == 3;
 
-    if (day_num < 0 || day_num >= days.size())
+    if (day_num < 0 || (size_t)day_num >= days.size())
     {
         std::cerr << "Usage error: Day given was not in accepted range."
                   << std::endl;
